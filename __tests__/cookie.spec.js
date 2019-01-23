@@ -82,7 +82,7 @@ test('key(index): get the key with the specified index', () => {
   expect(inst.key(0)).toBe('name')
 })
 
-toString('clear(): remove all cookies with default config', () => {
+test('clear(): remove all cookies with default config', () => {
   inst.clear()
   expect(inst.length).toBe(1)
 })
