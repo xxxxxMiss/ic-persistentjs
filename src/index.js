@@ -4,23 +4,14 @@
 import Storage from './storage'
 import Cookie from './cookie'
 
-const types = ['local', 'session', 'cookie']
-let storageInstances = {}
+export const ls = new Storage('local')
 
-export default function persist(options = {}) {
-  const type = typeof options === 'string'
-    ? options
-    : options.storage
+export const ss = new Storage('session')
 
-  if (!types.includes(type)) {
-    throw TypeError(`invalid type: ${type}, available types is ${types.join(',')}`)
-  }
+export const cookie = new Cookie()
 
-  if (storageInstances[type]) {
-    return storageInstances[type]
-  }
-
-  return type === 'cookie'
-    ? (storageInstances[type] = new Cookie())
-    : (storageInstances[type] = new Storage(type))
+export default {
+  ls,
+  ss,
+  cookie
 }

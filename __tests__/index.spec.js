@@ -1,30 +1,15 @@
-import persist from '../src'
 import Cookie from '../src/cookie'
 import Storage from '../src/storage'
+import persist, { ls, ss, cookie } from '../src'
 
-let instant = null
-beforeAll(() => {
-  instant = persist({ storage: 'local' })
-})
-afterAll(() => {
-  instant = null
-})
+test('persist have three props ', () => {
+  expect(Object.keys(persist)).toHaveLength(3)
 
-describe('persist(options)', () => {
-  test('passed options.storage get an instance', () => {
-    expect(instant).toBeInstanceOf(Storage)
-  })
+  expect(persist).toHaveProperty('ls')
+  expect(persist).toHaveProperty('ss')
+  expect(persist).toHaveProperty('cookie')
 
-  test('don`t create new instance when type is the small to previously', () => {
-    const newInstant = persist({ storage: 'local' })
-    expect(newInstant === instant).toBeTruthy()
-
-    const cookieInstant = persist({ storage: 'cookie' })
-    expect(cookieInstant).toBeInstanceOf(Cookie)
-  })
-})
-
-test('options can be a string represent a type', () => {
-  const storage = persist('session')
-  expect(storage.getItem).toBeDefined()
+  expect(ls).toBeInstanceOf(Storage)
+  expect(ss).toBeInstanceOf(Storage)
+  expect(cookie).toBeInstanceOf(Cookie)
 })

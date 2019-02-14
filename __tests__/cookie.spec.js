@@ -84,5 +84,5 @@ test('key(index): get the key with the specified index', () => {
 
 test('clear(): remove all cookies with default config', () => {
   inst.clear()
-  expect(inst.length).toBe(1)
+  expect(inst.length).toBe(0)
 })
