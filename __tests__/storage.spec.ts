@@ -1,7 +1,7 @@
 import Storage from '../src/storage'
 import { deserialize } from '../src/helpers'
 
-let inst = null
+let inst: any = null
 
 beforeAll(() => {
   inst = new Storage('local')
@@ -40,7 +40,9 @@ describe('usage: setItem method', () => {
     const data = {
       date: new Date(),
       regexp: /^jest/,
-      fn: function (callback) { return callback() }
+      fn: function(callback: () => void) {
+        return callback()
+      }
     }
     inst.setItem('specail', data, { isJSON: false })
     const data1 = deserialize(window.localStorage.getItem('specail'))
@@ -66,7 +68,9 @@ test('get correct value when persisted data is `Function`, `Date`, `RegExp`', ()
   const data = {
     date: new Date(),
     regexp: /^jest/,
-    fn: function (callback) { return callback() }
+    fn: function(callback: () => void) {
+      return callback()
+    }
   }
   inst.setItem('specialobj', data, { isJSON: false })
   const { date, regexp, fn } = inst.getItem('specialobj')

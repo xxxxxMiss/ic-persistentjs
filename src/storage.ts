@@ -1,8 +1,12 @@
-import serialize from 'serialize-javascript'
+import * as serialize from 'serialize-javascript'
 import { deserialize } from './helpers'
 
 export default class Storage {
-  constructor(type) {
+  storage:
+    | WindowLocalStorage['localStorage']
+    | WindowSessionStorage['sessionStorage']
+
+  constructor(type: string) {
     if (type === 'local') {
       this.storage = window.localStorage
     }
@@ -11,17 +15,17 @@ export default class Storage {
     }
   }
 
-  setItem(key, value, config = {}) {
+  setItem(key: string, value: any, config = {}) {
     config = Object.assign({}, { isJSON: true }, config)
     return this.storage.setItem(key, serialize(value, config))
   }
 
-  getItem(key) {
+  getItem(key: string) {
     const data = this.storage.getItem(key)
     return data ? deserialize(data) : null
   }
 
-  removeItem(key) {
+  removeItem(key: string) {
     return key ? this.storage.removeItem(key) : this.storage.clear()
   }
 
@@ -33,7 +37,7 @@ export default class Storage {
     return this.storage.length
   }
 
-  key(index) {
+  key(index: number) {
     return this.storage.key(index)
   }
 }

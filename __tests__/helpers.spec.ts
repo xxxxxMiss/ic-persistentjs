@@ -1,7 +1,7 @@
-import serialize from 'serialize-javascript'
+import * as serialize from 'serialize-javascript'
 import { parseTimeStr, deserialize } from '../src/helpers'
 
-let d = null
+let d: any = null
 beforeAll(() => {
   d = new Date()
 })
@@ -30,7 +30,9 @@ describe('deserialize(serializedStr)', () => {
     const data = {
       date: new Date(),
       regexp: /^jest/,
-      fn: function (callback) { callback() }
+      fn: function(callback: () => void) {
+        callback()
+      }
     }
     const serializedStr = serialize(data)
     const parsed = deserialize(serializedStr)
@@ -82,7 +84,9 @@ describe('parseTimeStr(str)', () => {
   })
 
   test('milliseconds/millsecond/msecs/msec/ms', () => {
-    expect(parseTimeStr('10ms').getMilliseconds()).toBeGreaterThanOrEqual(d.getMilliseconds())
+    expect(parseTimeStr('10ms').getMilliseconds()).toBeGreaterThanOrEqual(
+      d.getMilliseconds()
+    )
   })
 
   test('throw an error when passed an invalid string', () => {

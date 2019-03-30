@@ -1,9 +1,10 @@
-import Cookies from 'js-cookie'
+// TODO: how to let ts find a peerDependency?
+import * as Cookies from 'js-cookie'
 import { parseTimeStr } from './helpers'
 
 function parseCookie() {
   const json = Cookies.getJSON()
-  const pairs = []
+  const pairs: any[] = []
   for (const key in json) {
     pairs.push([key, json[key]])
   }
@@ -11,11 +12,11 @@ function parseCookie() {
 }
 
 export default class Cookie {
-  constructor(config = {}) {
-    Cookies.defaults = config
-  }
+  // constructor(config = {}) {
+  //   Cookies.defaults = config
+  // }
 
-  setItem(key, value, config = {}) {
+  setItem(key: string, value: any, config: Cookies.CookieAttributes = {}) {
     const expires = config.expires
     if (expires && typeof expires === 'string') {
       config.expires = parseTimeStr(expires)
@@ -27,16 +28,16 @@ export default class Cookie {
     return Cookies.set(key, value, config)
   }
 
-  getItem(key) {
+  getItem(key: string) {
     return Cookies.getJSON(key)
   }
 
-  removeItem(key, config) {
+  removeItem(key: string, config?: Cookies.CookieAttributes) {
     return Cookies.remove(key, config)
   }
 
   clear() {
-    [...parseCookie().keys()].forEach(key => {
+    ;[...parseCookie().keys()].forEach((key: string) => {
       Cookies.remove(key)
     })
   }
@@ -45,7 +46,7 @@ export default class Cookie {
     return parseCookie().size
   }
 
-  key(index) {
+  key(index: number): any {
     return [...parseCookie().keys()][index]
   }
 }
