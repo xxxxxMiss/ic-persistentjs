@@ -1,9 +1,11 @@
-import Cookies from 'js-cookie'
+import * as Cookies_ from 'js-cookie'
 import { parseTimeStr } from './helpers'
+
+const Cookies = Cookies_
 
 function parseCookie() {
   const json = Cookies.getJSON()
-  const pairs = []
+  const pairs: any[] = []
   for (const key in json) {
     pairs.push([key, json[key]])
   }
@@ -11,11 +13,15 @@ function parseCookie() {
 }
 
 export default class Cookie {
-  constructor(config = {}) {
-    Cookies.defaults = config
-  }
+  // constructor(config = {}) {
+  //   Cookies.defaults = config
+  // }
 
-  setItem(key, value, config = {}) {
+  public setItem(
+    key: string,
+    value: any,
+    config: Cookies.CookieAttributes = {}
+  ) {
     const expires = config.expires
     if (expires && typeof expires === 'string') {
       config.expires = parseTimeStr(expires)
@@ -27,25 +33,25 @@ export default class Cookie {
     return Cookies.set(key, value, config)
   }
 
-  getItem(key) {
+  public getItem(key: string) {
     return Cookies.getJSON(key)
   }
 
-  removeItem(key, config) {
+  public removeItem(key: string, config?: Cookies.CookieAttributes) {
     return Cookies.remove(key, config)
   }
 
-  clear() {
-    [...parseCookie().keys()].forEach(key => {
+  public clear() {
+    ;[...parseCookie().keys()].forEach((key: string) => {
       Cookies.remove(key)
     })
   }
 
-  get length() {
+  public get length() {
     return parseCookie().size
   }
 
-  key(index) {
+  public key(index: number): any {
     return [...parseCookie().keys()][index]
   }
 }

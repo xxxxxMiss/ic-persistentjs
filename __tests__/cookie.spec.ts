@@ -2,7 +2,7 @@ import Cookie from '../src/cookie'
 
 jest.setTimeout(10000)
 
-let inst = null
+let inst: any = null
 beforeAll(() => {
   inst = new Cookie()
 })
@@ -29,7 +29,7 @@ describe('setItem(key, value, config)', () => {
     expect(inst.getItem('obj')).toHaveProperty('age', 10)
   })
 
-  test('config.expires is a readable string', (done) => {
+  test('config.expires is a readable string', done => {
     inst.setItem('male', 'one', {
       expires: '3s'
     })
@@ -37,7 +37,9 @@ describe('setItem(key, value, config)', () => {
       expires: '3d'
     })
     expect(document.cookie).toContain(encodeURIComponent(inst.getItem('male')))
-    expect(document.cookie).toContain(encodeURIComponent(inst.getItem('female')))
+    expect(document.cookie).toContain(
+      encodeURIComponent(inst.getItem('female'))
+    )
     setTimeout(() => {
       expect(inst.getItem('male')).toBeUndefined()
       expect(inst.getItem('female')).toBe('two')

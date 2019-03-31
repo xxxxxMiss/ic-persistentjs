@@ -5,7 +5,7 @@ const d = h * 24
 const w = d * 7
 const y = d * 365
 // this code modified from https://github.com/zeit/ms
-function parse(str) {
+function parse(str?: any): number | undefined {
   str = String(str)
   if (str.length > 100) {
     return
@@ -62,7 +62,7 @@ function parse(str) {
   }
 }
 
-export function parseTimeStr(str) {
+export function parseTimeStr(str?: any): Date | never {
   const ms = parse(str)
 
   if (!ms) throw TypeError(`invalid param: ${str}`)
@@ -70,6 +70,6 @@ export function parseTimeStr(str) {
   return new Date(Date.now() + ms)
 }
 
-export function deserialize(serializedJavascript) {
-  return eval('(' + serializedJavascript + ')')
+export function deserialize(serializedJavascript?: any): any {
+  return eval(`(${serializedJavascript})`)
 }
