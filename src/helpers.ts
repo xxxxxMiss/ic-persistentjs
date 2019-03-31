@@ -71,5 +71,5 @@ export function parseTimeStr(str?: any): Date | never {
 }
 
 export function deserialize(serializedJavascript?: any): any {
-  return eval('(' + serializedJavascript + ')')
+  return eval(`(${serializedJavascript})`)
 }

@@ -2,7 +2,7 @@ import * as serialize from 'serialize-javascript'
 import { deserialize } from './helpers'
 
 export default class Storage {
-  storage:
+  private storage:
     | WindowLocalStorage['localStorage']
     | WindowSessionStorage['sessionStorage']
 
@@ -15,29 +15,29 @@ export default class Storage {
     }
   }
 
-  setItem(key: string, value: any, config = {}) {
-    config = Object.assign({}, { isJSON: true }, config)
-    return this.storage.setItem(key, serialize(value, config))
+  public setItem(key: string, value: any, config = {}) {
+    const newConf = { isJSON: true, ...config }
+    return this.storage.setItem(key, serialize(value, newConf))
   }
 
-  getItem(key: string) {
+  public getItem(key: string) {
     const data = this.storage.getItem(key)
     return data ? deserialize(data) : null
   }
 
-  removeItem(key: string) {
+  public removeItem(key: string) {
     return key ? this.storage.removeItem(key) : this.storage.clear()
   }
 
-  clear() {
+  public clear() {
     return this.storage.clear()
   }
 
-  get length() {
+  public get length() {
     return this.storage.length
   }
 
-  key(index: number) {
+  public key(index: number) {
     return this.storage.key(index)
   }
 }

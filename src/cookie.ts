@@ -16,7 +16,11 @@ export default class Cookie {
   //   Cookies.defaults = config
   // }
 
-  setItem(key: string, value: any, config: Cookies.CookieAttributes = {}) {
+  public setItem(
+    key: string,
+    value: any,
+    config: Cookies.CookieAttributes = {}
+  ) {
     const expires = config.expires
     if (expires && typeof expires === 'string') {
       config.expires = parseTimeStr(expires)
@@ -28,25 +32,25 @@ export default class Cookie {
     return Cookies.set(key, value, config)
   }
 
-  getItem(key: string) {
+  public getItem(key: string) {
     return Cookies.getJSON(key)
   }
 
-  removeItem(key: string, config?: Cookies.CookieAttributes) {
+  public removeItem(key: string, config?: Cookies.CookieAttributes) {
     return Cookies.remove(key, config)
   }
 
-  clear() {
+  public clear() {
     ;[...parseCookie().keys()].forEach((key: string) => {
       Cookies.remove(key)
     })
   }
 
-  get length() {
+  public get length() {
     return parseCookie().size
   }
 
-  key(index: number): any {
+  public key(index: number): any {
     return [...parseCookie().keys()][index]
   }
 }

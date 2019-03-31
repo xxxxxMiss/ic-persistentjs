@@ -17,7 +17,8 @@
     "test:watch": "jest --watch",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "release": "yarn build && standard-version"
+    "release": "yarn build && standard-version",
+    "lint": "tslint -p ."
   },
   "jest": {
     "collectCoverage": false,
@@ -66,6 +67,8 @@
     "rollup-plugin-typescript2": "^0.20.1",
     "standard-version": "^4.4.0",
     "ts-jest": "^24.0.0",
+    "tslint": "^5.14.0",
+    "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.4.1"
   },
   "files": [
