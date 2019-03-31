@@ -30,3 +30,6 @@ coverage
 *.DS_Store
 .AppleDouble
 .LSOverride
+
+# typescript compiler
+.rpt2_cache

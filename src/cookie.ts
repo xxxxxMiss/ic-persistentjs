@@ -1,6 +1,7 @@
-// TODO: how to let ts find a peerDependency?
-import * as Cookies from 'js-cookie'
+import * as Cookies_ from 'js-cookie'
 import { parseTimeStr } from './helpers'
+
+const Cookies = Cookies_
 
 function parseCookie() {
   const json = Cookies.getJSON()

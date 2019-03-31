@@ -26,5 +26,6 @@ export default {
       rollupCommonJSResolveHack: true
     }),
     commonjs()
-  ]
+  ],
+  external: ['js-cookie']
 }

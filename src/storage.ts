@@ -1,6 +1,7 @@
-import * as serialize from 'serialize-javascript'
+import * as serialize_ from 'serialize-javascript'
 import { deserialize } from './helpers'
 
+const serialize = serialize_
 export default class Storage {
   private storage:
     | WindowLocalStorage['localStorage']

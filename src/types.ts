@@ -16,5 +16,5 @@ export interface PersistCookie {
   removeItem(key: string, config?: Cookies.CookieAttributes): void
   clear(): void
   key(index: number): string | undefined
-  length: number
+  readonly length: number
 }
