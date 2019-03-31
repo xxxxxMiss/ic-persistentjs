@@ -21,6 +21,7 @@
     "no-parameter-reassignment": [false],
     "whitespace": [true, "check-operator"],
     "no-eval": [false],
+    "variable-name": [false],
     "ter-indent": [
       true,
       2,

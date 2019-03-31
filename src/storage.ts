@@ -3,7 +3,7 @@ import { deserialize } from './helpers'
 
 const serialize = serialize_
 export default class Storage {
-  private storage:
+  public readonly storage:
     | WindowLocalStorage['localStorage']
     | WindowSessionStorage['sessionStorage']
 
