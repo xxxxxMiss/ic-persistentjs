@@ -1,6 +1,6 @@
 {
   "name": "ic-persistentjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "use universal api to operate cookie,localStorage and sessionStorage",
   "author": "xxxxxMiss",
   "license": "MIT",
